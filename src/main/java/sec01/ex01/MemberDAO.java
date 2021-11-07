@@ -2,6 +2,7 @@ package sec01.ex01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,9 +27,13 @@ public class MemberDAO {
 			
 			String query = "SELECT * FROM T_MEMBER";
 			
-			Statement stmt = con.createStatement();
+			//PrepareStatement ¿¬½À
+			PreparedStatement pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
 			
-			ResultSet rs = stmt.executeQuery(query);
+			//Statement stmt = con.createStatement();
+			
+			//ResultSet rs = stmt.executeQuery(query);
 			
 			while(rs.next()) {
 				String id = rs.getString("id");
@@ -49,7 +54,7 @@ public class MemberDAO {
 			}
 			
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 			
 		} catch (Exception e) {
