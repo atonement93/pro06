@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import sec02.ex01.MemberVO;
@@ -113,6 +114,32 @@ public List<sec02.ex02.MemberVO> listMembers() {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void delMember(String id) {
+
+		try {
+			Context ctx = new InitialContext();
+			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			DataSource dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+				
+			Connection con = dataFactory.getConnection();
+			
+			String query = "DELETE FROM T_MEMBER" + "WHERE ID=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 }
 

@@ -89,10 +89,10 @@ public class MemberServlet extends HttpServlet {
 			vo.setEmail(email);
 			dao.addMember(vo);
 		}
-//			else if(command != null && command.equals("delMember")){
-//			String id = request.getParameter(id);
-//			dao.delMember(id);
-//		}
+			else if(command != null && command.equals("delMember")){
+			String id = request.getParameter("id");
+			dao.delMember(id);
+		}
 		List<MemberVO> list = dao.listMembers();
 		out.print("<html><body>");
 		out.print("<table border=1><tr align='center' bgcolor='lightgreen'>");
@@ -105,7 +105,8 @@ public class MemberServlet extends HttpServlet {
 			String name = memberVO.getName();
 			String email = memberVO.getEmail();
 			Date joinDate = memberVO.getJoinDate();
-			out.print("<tr><td>" + id + "</td><td>" + pw + "</td><td>" + name + "</td><td>" + email + "</td><td>" + joinDate + "</td><td>" + "<a href='/pro06/member3?command=delMember&id=" + id + "'>삭제</a></td></tr>");
+			out.print("<tr><td>" + id + "</td><td>" + pw + "</td><td>" + name + "</td><td>" + email + "</td><td>" + joinDate + "</td><td>"
+			+ "<a href='/pro06/member3?command=delMember&id=" + id + "'>삭제</a></td></tr>");
 		}
 		out.print("</table></body></html>");
 		out.print("<a href='/pro06/memberForm.html'>새 회원가입하기</a>");
