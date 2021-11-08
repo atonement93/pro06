@@ -3,8 +3,8 @@
 	<head>
 	<meta charset="UTF-8">
 	<title>Welcome Joining!</title>
-	<script type="text/javascript">
-		function fn_sendMember() {
+<!-- 	<script type="text/javascript">
+		function sendMember() {
 			var frmMember = document.frmMember;
 			var id = frmMember.id.value;
 			var pw = frmMember.pw.value;
@@ -24,12 +24,12 @@
 			frmMember.method="post";
 			frmMember.action="member3";
 			frmMember.submit();
-		}
+		} -->
 	</script>
 	</head>
 
 	<body>
-		<form name="frmMember">
+		<form name="frmMember" method="post" action="member3">
 			<table>
 				<th>회원가입</th>
 				<tr>
@@ -50,7 +50,7 @@
 				</tr>
 			</table>
 			
-			<input type="button" value="가입하기" onclick="fn_sendMember()">
+			<input type="submit" value="가입하기">
 			<input type="reset" value="다시입력">
 			<input type="hidden" name="command" value="addMember"/>
 		</form>
