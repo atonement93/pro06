@@ -8,7 +8,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Users/mhs/Desktop/바로가기/설치 파일/apache-tomcat-9.0.52-windows-x64/apache-tomcat-9.0.52/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mhs/Desktop/바로가기/설치 파일/ojdbc10-full.tar/ojdbc10-full/ojdbc10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mhs/Desktop/바로가기/설치 파일/tomcat-dbcp-7.0.30.jar/tomcat-dbcp-7.0.30.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
