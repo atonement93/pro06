@@ -125,7 +125,8 @@ public List<sec02.ex02.MemberVO> listMembers() {
 				
 			Connection con = dataFactory.getConnection();
 			
-			String query = "DELETE FROM T_MEMBER" + "WHERE ID=?";
+			String query = "DELETE FROM T_MEMBER" + " WHERE ID=?";
+			System.out.println("prepareStatement:" + query);
 			PreparedStatement pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1, id);

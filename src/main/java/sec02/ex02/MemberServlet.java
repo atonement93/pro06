@@ -45,30 +45,47 @@ public class MemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
 		MemberDAO dao = new MemberDAO();
-		List<MemberVO> list = dao.listMembers();
+		PrintWriter out = response.getWriter();
 		
+		String command = request.getParameter("command");
+		
+		if (command != null && command.equals("addMember")) {
+			String _id = request.getParameter("id");
+			String _pw = request.getParameter("pw");
+			String _name = request.getParameter("name");
+			String _email = request.getParameter("email");
+			MemberVO vo = new MemberVO();
+			vo.setId(_id);
+			vo.setPw(_pw);
+			vo.setName(_name);
+			vo.setEmail(_email);
+			dao.addMember(vo);
+		}else if(command != null && command.equals("delMember")){
+			String id = request.getParameter("id");
+			dao.delMember(id);
+		}
+		List<MemberVO> list = dao.listMembers();
 		out.print("<html><body>");
 		out.print("<table border=1><tr align='center' bgcolor='lightgreen'>");
-		out.print("<td>아이디</td><td>비밀번호</td><td>이름</td><td>이메일</td><td>가입일</td></tr>");
+		out.print("<td>아이디</td><td>비밀번호</td><td>이름</td><td>이메일</td><td>가입일</td><td>삭제</td></tr>");
 		
 		for(int i=0;i<list.size();i++) {
-			MemberVO memberVO = list.get(i);
-			String id=memberVO.getId();
-			String pw=memberVO.getPw();
-			String name=memberVO.getName();
-			String email=memberVO.getEmail();
-			Date joinDate=memberVO.getJoinDate();
-			out.print("<tr><td>"+id+"</td><td>"+pw+"</td><td>"+name+"</td><td>"+email+"</td><td>"+joinDate+"</td></tr>");
+			MemberVO memberVO = (MemberVO) list.get(i);
+			String id = memberVO.getId();
+			String pw = memberVO.getPw();
+			String name = memberVO.getName();
+			String email = memberVO.getEmail();
+			Date joinDate = memberVO.getJoinDate();
+			out.print("<tr><td>" + id + "</td><td>" + pw + "</td><td>" + name + "</td><td>" + email + "</td><td>" + joinDate + "</td><td>"
+			+ "<a href='/pro06/member3?command=delMember&id=" + id + "'>삭제</a></td></tr>");
 		}
-		out.print("</table></body><html>");
+		out.print("</table></body></html>");
+		out.print("<a href='/pro06/memberForm.html'>새 회원가입하기</a>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -78,18 +95,18 @@ public class MemberServlet extends HttpServlet {
 		String command = request.getParameter("command");
 		
 		if (command != null && command.equals("addMember")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			String _id = request.getParameter("id");
+			String _pw = request.getParameter("pw");
+			String _name = request.getParameter("name");
+			String _email = request.getParameter("email");
+			
 			MemberVO vo = new MemberVO();
-			vo.setId(id);
-			vo.setPw(pw);
-			vo.setName(name);
-			vo.setEmail(email);
+			vo.setId(_id);
+			vo.setPw(_pw);
+			vo.setName(_name);
+			vo.setEmail(_email);
 			dao.addMember(vo);
-		}
-			else if(command != null && command.equals("delMember")){
+		}else if(command != null && command.equals("delMember")){
 			String id = request.getParameter("id");
 			dao.delMember(id);
 		}
