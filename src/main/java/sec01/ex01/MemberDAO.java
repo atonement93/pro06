@@ -15,11 +15,6 @@ public class MemberDAO {
 		
 		List<MemberVO> list = new ArrayList<MemberVO>();
 		
-		String user = "user02";
-		String password = "user02";
-		String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
-		String driver = "oracle.jdbc.driver.OracleDriver";
-		
 		try {
 			Class.forName(driver);
 			
@@ -27,7 +22,7 @@ public class MemberDAO {
 			
 			String query = "SELECT * FROM T_MEMBER";
 			
-			//PrepareStatement ¿¬½À
+			//PrepareStatement Â¿Â¬Â½Ã€
 			PreparedStatement pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			
